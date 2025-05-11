@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.composemultiplatform.book.book.domain.Book
+import com.composemultiplatform.book.book.domain.model.Book
 
 @Composable
 fun BookList(

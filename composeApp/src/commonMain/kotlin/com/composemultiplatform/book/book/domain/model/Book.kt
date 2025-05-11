@@ -1,4 +1,4 @@
-package com.composemultiplatform.book.book.domain
+package com.composemultiplatform.book.book.domain.model
 
 data class Book(
     val id: String,

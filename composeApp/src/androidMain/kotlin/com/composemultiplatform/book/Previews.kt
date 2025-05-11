@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.composemultiplatform.book.book.domain.Book
+import com.composemultiplatform.book.book.domain.model.Book
 import com.composemultiplatform.book.book.presentation.books.BooksScreen
 import com.composemultiplatform.book.book.presentation.books.BooksState
 import com.composemultiplatform.book.book.presentation.books.component.SearchBar

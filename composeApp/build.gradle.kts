@@ -107,11 +107,27 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            buildConfigField(
+                type = "String",
+                name = "BASE_URL",
+                value = "\"https://openlibrary.org\""
+            )
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
+            buildConfigField(
+                type = "String",
+                name = "BASE_URL",
+                value = "\"https://openlibrary.org\""
+            )
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

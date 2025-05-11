@@ -1,6 +1,6 @@
 package com.composemultiplatform.book.book.presentation.books
 
-import com.composemultiplatform.book.book.domain.Book
+import com.composemultiplatform.book.book.domain.model.Book
 
 sealed interface BooksAction {
     data class OnSearchQueryChange(val query: String) : BooksAction

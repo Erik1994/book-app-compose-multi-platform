@@ -1,4 +1,4 @@
-package com.composemultiplatform.book.core.presentation
+package com.composemultiplatform.book.core.presentation.util
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.resources.StringResource

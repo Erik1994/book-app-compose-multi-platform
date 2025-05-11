@@ -1,7 +1,6 @@
 package com.composemultiplatform.book.book.presentation.books
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -38,7 +37,7 @@ import bookappcmp.composeapp.generated.resources.favorites
 import bookappcmp.composeapp.generated.resources.no_favorite_books
 import bookappcmp.composeapp.generated.resources.no_search_results
 import bookappcmp.composeapp.generated.resources.search_results
-import com.composemultiplatform.book.book.domain.Book
+import com.composemultiplatform.book.book.domain.model.Book
 import com.composemultiplatform.book.book.presentation.books.component.BookList
 import com.composemultiplatform.book.book.presentation.books.component.SearchBar
 import com.composemultiplatform.book.core.presentation.DarkBlue
