@@ -44,11 +44,10 @@ import com.composemultiplatform.book.core.presentation.DarkBlue
 import com.composemultiplatform.book.core.presentation.DesertWhite
 import com.composemultiplatform.book.core.presentation.SandYellow
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun BooksScreenRoot(
-    viewModel: BooksViewModel = koinViewModel(),
+    viewModel: BooksViewModel,
     onBookClick: (Book) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()

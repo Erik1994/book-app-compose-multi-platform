@@ -37,7 +37,7 @@ import bookappcmp.composeapp.generated.resources.Res
 import bookappcmp.composeapp.generated.resources.book_error
 import coil3.compose.rememberAsyncImagePainter
 import com.composemultiplatform.book.book.domain.model.Book
-import com.composemultiplatform.book.book.presentation.books.util.formatTooOneDecimalText
+import com.composemultiplatform.book.book.presentation.books.util.formatToOneDecimalText
 import com.composemultiplatform.book.core.presentation.LightBlue
 import com.composemultiplatform.book.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
@@ -73,8 +73,9 @@ fun BookListItem(
                 val painter = rememberAsyncImagePainter(
                     model = book.imageUrl,
                     onSuccess = {
+                        val size = it.painter.intrinsicSize
                         imageLoadResult =
-                            if (it.painter.intrinsicSize.width > 1 && it.painter.intrinsicSize.height > 1) {
+                            if (size.width > 1 && size.height > 1) {
                                 Result.success(it.painter)
                             } else {
                                 Result.failure(Throwable("Invalid image size"))
@@ -127,7 +128,7 @@ fun BookListItem(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = rating.formatTooOneDecimalText(),
+                            text = rating.formatToOneDecimalText(),
                             style = MaterialTheme.typography.bodyMedium
                         )
                         Icon(

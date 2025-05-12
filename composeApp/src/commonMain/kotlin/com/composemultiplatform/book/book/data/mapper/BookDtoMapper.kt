@@ -4,7 +4,7 @@ import com.composemultiplatform.book.book.data.dto.SearchBookDto
 import com.composemultiplatform.book.book.domain.model.Book
 
 fun SearchBookDto.toModel(): Book = Book (
-    id = id,
+    id = id.substringAfterLast("/"),
     title = title,
     imageUrl = if (coverKey != null) {
         "https://covers.openlibrary.org/b/olid/${coverKey}-L.jpg"

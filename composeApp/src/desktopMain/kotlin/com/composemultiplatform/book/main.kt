@@ -2,7 +2,8 @@ package com.composemultiplatform.book
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.composemultiplatform.book.di.initKoin
+import com.composemultiplatform.book.app.App
+import com.composemultiplatform.book.app.di.initKoin
 
 fun main() {
     initKoin()
