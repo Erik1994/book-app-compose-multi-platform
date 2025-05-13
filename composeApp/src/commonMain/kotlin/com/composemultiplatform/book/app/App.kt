@@ -1,5 +1,7 @@
 package com.composemultiplatform.book.app
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -34,7 +36,10 @@ fun App() {
                 startDestination = Route.Books
             ) {
 
-                composable<Route.Books> {
+                composable<Route.Books>(
+                    exitTransition = { slideOutHorizontally() },
+                    popEnterTransition = { slideInHorizontally() }
+                ) {
                     val selectedBookSharedViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(
                         navController = navController
                     )
@@ -54,7 +59,10 @@ fun App() {
                     )
                 }
 
-                composable<Route.BookDetail> { entry ->
+                composable<Route.BookDetail>(
+                    enterTransition = { slideInHorizontally { initialOffset -> initialOffset } },
+                    exitTransition = { slideOutHorizontally { initialState -> initialState } }
+                ) { entry ->
                     val selectedBookSharedViewModel = entry.sharedKoinViewModel<SelectedBookViewModel>(
                         navController = navController
                     )
