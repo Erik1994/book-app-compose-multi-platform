@@ -1,4 +1,4 @@
-package com.composemultiplatform.book.book.data.network
+package com.composemultiplatform.book.book.data.remote
 
 import com.composemultiplatform.book.book.data.dto.BookWorkDto
 import com.composemultiplatform.book.book.data.dto.SearchResponseDto

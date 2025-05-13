@@ -5,20 +5,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.composemultiplatform.book.app.Route
+import com.composemultiplatform.book.bookdetail.domain.AddFavoriteBookUseCase
 import com.composemultiplatform.book.bookdetail.domain.BookDescriptionUseCase
+import com.composemultiplatform.book.bookdetail.domain.CheckIsFavoriteBookUseCase
+import com.composemultiplatform.book.bookdetail.domain.DeleteFavoriteBookUseCase
+import com.composemultiplatform.book.bookdetail.domain.GetAllFavoriteBooksUseCase
 import com.composemultiplatform.book.core.domain.onError
 import com.composemultiplatform.book.core.domain.onSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class BookDetailViewModel(
+    private val savedStateHandle: SavedStateHandle,
     private val bookDescriptionUseCase: BookDescriptionUseCase,
-    private val savedStateHandle: SavedStateHandle
+    private val addFavoriteBookUseCase: AddFavoriteBookUseCase,
+    private val getAllFavoriteBooksUseCase: GetAllFavoriteBooksUseCase,
+    private val checkIsFavoriteBookUseCase: CheckIsFavoriteBookUseCase,
+    private val deleteFavoriteBookUseCase: DeleteFavoriteBookUseCase,
 ) : ViewModel() {
 
     private val bookId = savedStateHandle.toRoute<Route.BookDetail>().id
@@ -27,6 +36,7 @@ class BookDetailViewModel(
     val state = _state
         .onStart {
             fetchBookDescription()
+            observeFavoriteStatus()
         }
         .stateIn(
             viewModelScope,
@@ -43,11 +53,25 @@ class BookDetailViewModel(
             }
 
             BookDetailAction.OnFavoriteClick -> {
-
+                viewModelScope.launch {
+                    if (state.value.isFavorite) {
+                        deleteFavoriteBookUseCase(bookId)
+                    } else {
+                        state.value.book?.let { addFavoriteBookUseCase(it) }
+                    }
+                }
             }
 
             else -> Unit
         }
+    }
+
+    private fun observeFavoriteStatus() {
+        checkIsFavoriteBookUseCase(bookId)
+            .onEach { isFavorite ->
+                _state.update { it.copy(isFavorite = isFavorite) }
+            }
+            .launchIn(viewModelScope)
     }
 
     private fun fetchBookDescription() {
